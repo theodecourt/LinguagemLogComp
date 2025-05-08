@@ -1,7 +1,6 @@
 # TripScheduler – Gramática EBNF
 
-Este documento apresenta a gramática EBNF completa da DSL **TripScheduler**, para descrever roteiros de viagem, atividades diárias e orçamento em dólares (USD). Você pode copiar e colar este texto em qualquer plataforma que suporte Markdown.
-
+Este documento apresenta a gramática EBNF completa da DSL **TripScheduler**, para descrever roteiros de viagem, atividades diárias e orçamento em dólares (USD).
 ---
 
 ## 1. Visão Geral
