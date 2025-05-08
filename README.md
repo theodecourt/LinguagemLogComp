@@ -17,7 +17,7 @@ Este documento apresenta a gramática EBNF completa da DSL **TripScheduler**, pa
 ## 2. Gramática EBNF
 
 ```ebnf
-(* TripScheduler EBNF *)
+(* TripLang EBNF Grammar *)
 
 program        = { statement } ;
 
@@ -28,64 +28,51 @@ statement      = destino_decl
                | loop_stmt
                ;
 
-destino_decl   = "destino" string_literal
-                   [ "," "país" "=" string_literal ]
-               ;
-               (* Ex.: destino "Lisboa", país="Portugal" *)
+// Declaração de destino com opção de país
+
+destino_decl   = "destino" string_literal [ "," "país" "=" string_literal ] ;
+
+// Período da viagem
 
 viagem_decl    = "viagem" "de" date "até" date ;
-               (* Ex.: viagem de 2025-07-10 até 2025-07-20 *)
 
-budget_decl    = "budget" number "USD" ;
-               (* Ex.: budget 1500 USD *)
+// Orçamento em dólares (apenas inteiros)
 
-dia_block      = "dia" integer "{"
-                    { activity_stmt cost_stmt }
-                 "}"
-               ;
-               (* Ex.:
-                  dia 2 {
-                    atividade "City tour"
-                    custo 30.0 USD
-                    atividade "Jantar típico"
-                    custo 25.0 USD
-                  }
-               *)
+budget_decl    = "budget" integer "USD" ;
 
-loop_stmt      = "para" "cada" "dia" "in" range "{"
-                    { activity_stmt cost_stmt }
-                 "}"
-               ;
-               (* Ex.:
-                  para cada dia in 5..7 {
-                    atividade "Partida de futebol na praia"
-                    custo 0.0 USD
-                  }
-               *)
+// Bloco de dia usando chaves
+
+dia_block      = "dia" integer "{" { activity_stmt cost_stmt } "}" ;
+
+// Loop para dias, com chaves
+
+loop_stmt      = "para" "cada" "dia" "in" range "{" { activity_stmt cost_stmt } "}" ;
+
+// Declarações de atividade e custo (apenas inteiros)
 
 activity_stmt  = "atividade" string_literal ;
-               (* Ex.: atividade "Aula de surf em Ericeira" *)
+cost_stmt      = "custo" integer "USD" ;
 
-cost_stmt      = "custo" number "USD" ;
-               (* Ex.: custo 60.0 USD *)
+// Intervalo inclusivo
 
 range          = integer ".." integer ;
-               (* Ex.: 5..7 — dias 5, 6 e 7 *)
-               
+
+// Data no formato YYYY-MM-DD
+
 date           = digit digit digit digit "-" digit digit "-" digit digit ;
-               (* Ex.: 2025-07-10 *)
+
+// Cadeia de caracteres entre aspas
 
 string_literal = '"' { character } '"' ;
-               (* Ex.: "Praia do Rosa" *)
 
-number         = integer [ "." integer ] ;
-               (* Ex.: 100, 45.5 *)
+// Apenas inteiros (sem pontos decimais)
 
 integer        = digit { digit } ;
+
 digit          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
+// Qualquer caractere exceto aspa dupla
 
 character      = ? any character except '"' ? ;
 
-(* Comentários opcionais no nível do lexer
-   Ex.: linhas iniciando com ‘#’ são ignoradas. *)
 ```
