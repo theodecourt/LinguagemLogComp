@@ -17,9 +17,10 @@ Este documento apresenta a gramática EBNF completa da DSL **TripScheduler**, pa
 ## 2. Gramática EBNF
 
 ```ebnf
-(* TripLang EBNF Grammar *)
+(* TripScheduler EBNF Grammar *)
 
 program        = { statement } ;
+(* Um programa consiste em zero ou mais declarações *)
 
 statement      = destino_decl
                | viagem_decl
@@ -27,52 +28,56 @@ statement      = destino_decl
                | dia_block
                | loop_stmt
                ;
+(* Tipos de declarações suportadas *)
 
-// Declaração de destino com opção de país
+(* Declaração de destino com opção de país *)
+destino_decl   = "destino" string_literal ["," "país" "=" string_literal] ;
+(* Ex.: destino "Lisboa", país="Portugal" *)
 
-destino_decl   = "destino" string_literal [ "," "país" "=" string_literal ] ;
-
-// Período da viagem
-
+(* Período da viagem *)
 viagem_decl    = "viagem" "de" date "até" date ;
+(* Ex.: viagem de 2025-07-10 até 2025-07-20 *)
 
-// Orçamento em dólares (apenas inteiros)
-
+(* Orçamento em USD (apenas inteiros) *)
 budget_decl    = "budget" integer "USD" ;
+(* Ex.: budget 1500 USD *)
 
-// Bloco de dia usando chaves
-
+(* Bloco de dia usando chaves *)
 dia_block      = "dia" integer "{" { activity_stmt cost_stmt } "}" ;
+(* Ex.: dia 2 { atividade "City tour" custo 30 USD } *)
 
-// Loop para dias, com chaves
-
+(* Loop de dias *)
 loop_stmt      = "para" "cada" "dia" "in" range "{" { activity_stmt cost_stmt } "}" ;
+(* Ex.: para cada dia in 5..7 { atividade "Futebol na praia" custo 0 USD } *)
 
-// Declarações de atividade e custo (apenas inteiros)
-
+(* Declaração de atividade *)
 activity_stmt  = "atividade" string_literal ;
+(* Ex.: atividade "Aula de surf em Ericeira" *)
+
+(* Declaração de custo em USD *)
 cost_stmt      = "custo" integer "USD" ;
+(* Ex.: custo 60 USD *)
 
-// Intervalo inclusivo
-
+(* Intervalo inclusivo de dias *)
 range          = integer ".." integer ;
+(* Ex.: 5..7 *)
 
-// Data no formato YYYY-MM-DD
-
+(* Data no formato YYYY-MM-DD *)
 date           = digit digit digit digit "-" digit digit "-" digit digit ;
+(* Ex.: 2025-07-10 *)
 
-// Cadeia de caracteres entre aspas
-
+(* Cadeia de caracteres entre aspas *)
 string_literal = '"' { character } '"' ;
+(* Ex.: "Praia do Rosa" *)
 
-// Apenas inteiros (sem pontos decimais)
-
+(* Apenas inteiros (sem parte decimal) *)
 integer        = digit { digit } ;
+(* Ex.: 100 *)
 
 digit          = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
 
-// Qualquer caractere exceto aspa dupla
-
+(* Qualquer caractere exceto aspa dupla *)
 character      = ? any character except '"' ? ;
+
 
 ```
