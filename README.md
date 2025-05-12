@@ -81,3 +81,28 @@ character      = ? any character except '"' ? ;
 
 
 ```
+
+## 03. Utilização de Flex e Bison
+
+### Análise Léxica – Flex (trip.l)
+
+O Flex é responsável por identificar os tokens da linguagem, como palavras-chave (destino, viagem, budget), literais ("Lisboa"), números (1500) e símbolos ({, .., etc). Esses tokens são passados para o analisador sintático.
+
+### Análise Sintática – Bison (trip.y)
+
+O Bison define a gramática da linguagem (baseada em EBNF) e valida se a sequência de tokens está correta. Ele também pode ser estendido para construir uma árvore sintática ou executar ações (como imprimir ou armazenar dados).
+
+### Geração dos arquivos
+
+```
+bison -d trip.y      # Gera trip.tab.c e trip.tab.h
+flex trip.l          # Gera lex.yy.c
+gcc trip.tab.c lex.yy.c -o trip_scheduler -lfl   # Compila o analisador
+```
+
+### Execução do programa
+
+```
+./trip_scheduler < entrada.txt
+```
+
