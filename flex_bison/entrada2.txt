@@ -1,0 +1,25 @@
+destino "Tóquio", país="Japão"
+viagem de 2025-10-01 até 2025-10-15
+budget 3000 USD
+
+dia 1 {
+  atividade "Chegada e transporte para hotel"
+  custo 70 USD
+}
+
+dia 2 {
+  atividade "Passeio no bairro de Shibuya"
+  custo 40 USD
+  atividade "Jantar em izakaya local"
+  custo 50 USD
+}
+
+para cada dia in 3..5 {
+  atividade "Exploração livre"
+  custo 0 USD
+}
+
+dia 6 {
+  atividade "Viagem para Kyoto"
+  custo 100 USD
+}
