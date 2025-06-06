@@ -1,0 +1,23 @@
+// Roteiro de Viagem para a Califórnia
+
+destino "Los Angeles", país="EUA"
+
+viagem de 2025-09-15 até 2025-09-22
+budget 2000 USD
+
+dia 1 {
+    atividade "Chegada e aluguel do carro"
+    custo 300 USD
+    atividade "Check-in no hotel"
+    custo 450 USD
+}
+
+dia 2 {
+    atividade "Visita ao letreiro de Hollywood"
+    custo 20 USD
+}
+
+para cada dia in 3..5 {
+    atividade "Dia livre na praia de Santa Mônica"
+    custo 50 USD
+}
