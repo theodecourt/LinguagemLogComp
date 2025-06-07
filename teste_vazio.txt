@@ -1,0 +1,3 @@
+// Este é um arquivo de roteiro vazio.
+// Nenhuma declaração será processada.
+

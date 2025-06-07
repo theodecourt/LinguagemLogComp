@@ -1,0 +1,9 @@
+// Apenas o essencial
+
+destino "Montevidéu"
+budget 500 USD
+
+dia 1 {
+    atividade "Passeio pela Ciudad Vieja"
+    custo 25 USD
+}

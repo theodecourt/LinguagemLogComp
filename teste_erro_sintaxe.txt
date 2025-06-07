@@ -1,0 +1,4 @@
+// Erro de sintaxe: 'USD' antes do valor
+
+destino "Berlim"
+budget USD 1200

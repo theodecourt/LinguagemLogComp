@@ -1,0 +1,11 @@
+// Teste de estouro de orçamento
+
+destino "Paris"
+budget 500 USD
+
+dia 1 {
+    atividade "Ingresso para o Louvre"
+    custo 20 USD
+    atividade "Jantar na Torre Eiffel"
+    custo 500 USD
+}

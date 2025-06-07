@@ -1,0 +1,9 @@
+// Teste de loop para um único dia
+
+destino "Rio de Janeiro"
+budget 100 USD
+
+para cada dia in 3..3 {
+    atividade "Visitar o Cristo Redentor"
+    custo 30 USD
+}

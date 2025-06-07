@@ -1,0 +1,7 @@
+destino "Madri"
+budget 1000 USD
+
+dia 1 {
+    atividade "Visita ao Museu do Prado"
+    custo #50 USD // Símbolo '#' é inválido
+}
